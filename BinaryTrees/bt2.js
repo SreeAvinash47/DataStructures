@@ -10,7 +10,7 @@ class Node{
     }
 }
 function height(x){
-    if(x===null) return -1
+    if(x==null) return -1
     let left = height(x.left)
     let right = height(x.right)
     return Math.max(left, right)+1
