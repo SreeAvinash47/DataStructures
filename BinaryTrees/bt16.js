@@ -19,6 +19,7 @@ function binaryTree(){
     x.right.right = new Node(25)
     return x
 }
+
 function sum_tree(x){
     if(x==null) return 0
     let leftSum = sum_tree(x.left)
@@ -34,3 +35,4 @@ function run(){
     console.log(x)
 }
 run()
+
