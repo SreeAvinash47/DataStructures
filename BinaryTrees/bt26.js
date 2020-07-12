@@ -2,6 +2,7 @@
     * Problem:
     *      Find the lowest common ancestor of two node in a binary tree
     * */
+const {stack_track} = require('./binary_tree_utils.js');
 class Node{
     constructor(key=null, left=null, right=null){
         this.key = key;
@@ -23,9 +24,10 @@ function binaryTree(){
 }
 
 function find_lca(root, lca, x, y){
-    if(root==null) return [false,lca]
+    stack_track('push', `find_lca(${root?root.key:root},${lca},${x.key},${y.key})`)
+    if(root==null) return stack_track('pop', [false, lca])
     if (root==x || root==y){
-        return [true, root]
+        return stack_track('pop', [true, root])
     }
     const left_lca = find_lca(root.left, lca, x, y)
     let left = left_lca[0]
@@ -34,16 +36,17 @@ function find_lca(root, lca, x, y){
     let right = right_lca[0]
     lca = right_lca[1]
     if (left && right){
+        console.log('LCA found')
         lca = root
     }
-    return [left || right, lca]
+    return stack_track('pop', [left || right, lca])
 }
 function run(){
     const root = binaryTree()
     const x = root.left.left
     const y = root.left.right.right
     const z = root.right.left
-    const lca = find_lca(root, null, x, z)[1]
+    const lca = find_lca(root, null, x, y)[1]
     console.log(lca)
 }
 run()
